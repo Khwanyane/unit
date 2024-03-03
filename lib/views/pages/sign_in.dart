@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:units_/routes/route_manager.dart';
+import 'package:units_/views/widgets/button.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -29,17 +31,22 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[350],
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(60.0),
+              child: Lottie.asset('assets/hi.json'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
               child: TextField(
                 keyboardType: TextInputType.emailAddress,
                 controller: name,
                 decoration: const InputDecoration(
-                    hintText: 'Please enter your name',
+                    hintText: 'What is your name ?',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(9))),
                     focusedBorder: OutlineInputBorder(
@@ -50,19 +57,27 @@ class _SignInState extends State<SignIn> {
               height: 10,
             ),
             ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                onPressed: () {
-                  setState(() {
-                    final snackBar = SnackBar(
-                      content: Text('Welcome ${name.text}'),
-                      backgroundColor: Colors.blue,
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  });
-
-                  Navigator.of(context).pushNamed(RouteManager.homePage);
-                },
-                child: const Text('Start')),
+              onPressed: () {
+                setState(() {
+                  final snackBar = SnackBar(
+                    content: Text(
+                      'hello ${name.text}',
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    backgroundColor: Colors.grey[200],
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                });
+                Navigator.of(context).pushNamed(RouteManager.unitsPage);
+              },
+              child: const Text(
+                'Submit',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+          
           ],
         ),
       ),

@@ -13,15 +13,23 @@ class UnitsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<FetchUnits>().fetchUnits;
     return Scaffold(
+      backgroundColor: Colors.grey[350],
       appBar: AppBar(
-        title: const Text('Units'),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(RouteManager.signIn);
+            },
+            icon: const Icon(Icons.arrow_back)),
+        title: const Text('u n i t s'),
         centerTitle: true,
+        backgroundColor: Colors.grey[350],
         actions: [
           IconButton(
               onPressed: () {
                 context.read<FetchUnits>().fetchUnits;
-                Navigator.of(context).pushNamed(RouteManager.homePage);
-                Navigator.of(context).pushNamed(RouteManager.homePage);
+                Navigator.of(context).pushNamed(RouteManager.searchPage);
+                Navigator.of(context).pushNamed(RouteManager.searchPage);
               },
               icon: const Icon(Icons.search))
         ],

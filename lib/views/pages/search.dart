@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
+
 import 'package:units_/views/widgets/snackbar.dart';
 import 'package:units_/views/widgets/units.dart';
 
-import '../../routes/route_manager.dart';
-import '../../services/units_services.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Search extends StatefulWidget {
+  const Search({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Search> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<Search> {
   late TextEditingController unit;
   int unitNumber = 0;
 
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
     unit = TextEditingController();
   }
@@ -34,23 +33,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[350],
       appBar: AppBar(
-        title: const Text('Welcome'),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-              onPressed: () {
-                context.read<FetchUnits>().fetchUnits;
-                Navigator.of(context).pushNamed(RouteManager.signIn);
-              },
-              icon: const Icon(Icons.logout_outlined))
-        ],
+        backgroundColor: Colors.grey[350],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Lottie.asset('assets/search.json'),
+            ),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: TextField(
@@ -68,31 +62,31 @@ class _HomePageState extends State<HomePage> {
               height: 15,
             ),
             ElevatedButton(
-                onPressed: () {
-                  unitNumber = int.parse(unit.text);
+              onPressed: () {
+                unitNumber = int.parse(unit.text);
 
-                  if (unitNumber >= 1 && unitNumber <= 4) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => Unit(
-                              unitNumber: unitNumber,
-                            )),
-                      ),
-                    );
-                  } else {
-                    snackBar(context, 'Incorrect input');
-                  }
-                },
-                child: const Text('Search')),
+                if (unitNumber >= 1 && unitNumber <= 4) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) => Unit(
+                            unitNumber: unitNumber,
+                          )),
+                    ),
+                  );
+                } else {
+                  snackBar(context, 'incorrect input');
+                }
+              },
+              child: const Text(
+                'Search',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+            ),
             const SizedBox(
               height: 9,
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RouteManager.unitsPage);
-              },
-              child: const Text('View all units'),
             ),
             const SizedBox(
               height: 50,

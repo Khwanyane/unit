@@ -14,14 +14,25 @@ class Unit extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<FetchUnits>().fetchUnits;
     return Scaffold(
-      appBar: AppBar(title: const Text('Unit'), centerTitle: true, actions: [
-        IconButton(
-            onPressed: () {
-              context.read<FetchUnits>().fetchUnits;
-              Navigator.of(context).pushNamed(RouteManager.homePage);
-            },
-            icon: const Icon(Icons.search))
-      ]),
+      backgroundColor: Colors.grey[350],
+      appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(RouteManager.unitsPage);
+              },
+              icon: const Icon(Icons.arrow_back)),
+          automaticallyImplyLeading: false,
+          title: const Text('u n i t'),
+          centerTitle: true,
+          backgroundColor: Colors.grey[350],
+          actions: [
+            IconButton(
+                onPressed: () {
+                  context.read<FetchUnits>().fetchUnits;
+                  Navigator.of(context).pushNamed(RouteManager.searchPage);
+                },
+                icon: const Icon(Icons.search))
+          ]),
       body: RefreshIndicator(
         onRefresh: () async {
           await context.read<FetchUnits>().fetchUnits;
@@ -35,7 +46,7 @@ class Unit extends StatelessWidget {
                       ? const Text('Error: Incorrect input detected ',
                           textAlign: TextAlign.center)
                       : ListView.builder(
-                          itemCount: value.map['Specs'].length,
+                          itemCount: value.map['Specs'].length - 3,
                           itemBuilder: (context, index) {
                             if (unitNumber < 1 && unitNumber > 4) {
                               snackBar(context, 'error');

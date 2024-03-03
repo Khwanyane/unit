@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:units_/views/pages/search.dart';
 import 'package:units_/views/pages/sign_in.dart';
 
-import '../views/pages/home_page.dart';
 import '../views/pages/units_list.dart';
 
 class RouteManager {
   static const String signIn = '/';
-  static const String homePage = '/homePage';
+  static const String searchPage = '/searchPage';
   static const String unitsPage = '/unitsPage';
 
   static Route<dynamic> routeGenerator(RouteSettings settings) {
@@ -16,9 +15,9 @@ class RouteManager {
         return MaterialPageRoute(
           builder: (context) => const SignIn(),
         );
-      case homePage:
+      case searchPage:
         return MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const Search(),
         );
       case unitsPage:
         return MaterialPageRoute(
